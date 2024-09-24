@@ -32,7 +32,7 @@ data.forEach(element =>{
     article.appendChild(texte);
 
 });
-
+console.log("test commit");
 })();
 
-MODIFICATION
+
