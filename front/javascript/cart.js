@@ -159,15 +159,15 @@
             body: JSON.stringify({contact:contact,products:productsTable})
         })
         
-        .then(response => response.json()) // Ajout de cette ligne pour traiter la réponse
+        .then(response => response.json())  
         .then(data => {
-            console.log(data.orderId); // Récupération de l'order id
-            // Redirection vers la page de confirmation avec l'order id
+            console.log(data.orderId); 
             window.location.href = `confirmation.html?orderId=${data.orderId}`;
         })
         .catch(error => {
             console.error("Erreur lors de la commande :", error);
         });
      });
+     console.log("test")
  })();
  
