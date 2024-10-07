@@ -44,5 +44,6 @@
            quantity += existingQuantity;
        }
        localStorage.setItem(cartItemKey, quantity);
+       window.location.href = "cart.html";
    })
 })();
