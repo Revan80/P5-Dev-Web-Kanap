@@ -82,8 +82,8 @@
         let newQuantity = itemQuantityBtn.value;
         localStorage.setItem(key, newQuantity);
         refreshCart();
-        if(itemQuantityBtn.value < 0){
-            itemQuantityBtn.value = 0;
+        if(itemQuantityBtn.value <= 0){
+            itemQuantityBtn.value = 1;
             
         }
     }
