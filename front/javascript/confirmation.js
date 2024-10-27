@@ -11,4 +11,7 @@
 
         orderElement.textContent = getURLParameter('orderId');
     }
+
+    localStorage.clear();
 })();
+

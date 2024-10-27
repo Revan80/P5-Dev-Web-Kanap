@@ -1,13 +1,18 @@
-(async () => {
-   let parametreURL = window.location.search;
-   const urlParam = new URLSearchParams(parametreURL);
-   const productID = urlParam.get('id');
+(async () => { 
+   let parametreURL = window.location.search; 
+   const urlParam = new URLSearchParams(parametreURL); 
+   const productID = urlParam.get('id'); 
 
-   let reponse = await fetch("http://localhost:3000/api/products/" + productID);
-   data = await reponse.json(); //ajouter try
+   try{
+       let reponse = await fetch("http://localhost:3000/api/products/" + productID); 
+       data = await reponse.json(); 
+   }catch(error){
+    console.log(error);
+    return;
+   }
 
    let title = document.querySelector("#title");
-   title.innerHTML = data.name;
+   title.innerHTML = data.name; 
    let price = document.querySelector("#price")
    price.innerHTML = data.price;
    let description = document.querySelector("#description");
@@ -29,12 +34,33 @@
 
    document.querySelector(".item__img").appendChild(img);
 
-   let btnAddToCart = document.querySelector("#addToCart");
+   let quantityInput = document.querySelector("#quantity");
+
+    quantityInput.addEventListener("click", function() { 
+        let newQuantity = quantityInput.value;
+        if(newQuantity <= 0 || newQuantity > 100){
+           quantityInput.value = 1;
+        }
+    });
+
+    quantityInput.addEventListener("keyup", function() {
+        let newQuantity = quantityInput.value;
+        if(newQuantity <= 0 || newQuantity > 100){
+           quantityInput.value = 1;
+        }
+    });
+
+
+
+
+
+   let btnAddToCart = document.querySelector("#addToCart");  // EXPLICATION
    btnAddToCart.addEventListener("click", () => {
        let selectedColor = colorsViseur.value;
-       let quantity = document.querySelector("#quantity").value;
+       let quantity = quantityInput.value;
        quantity = parseInt(quantity);
-       if (quantity === 0) {
+       if (quantity <= 0) {
+        
            return;
        }
        let cartItemKey = productID + "-" + selectedColor;
@@ -44,6 +70,6 @@
            quantity += existingQuantity;
        }
        localStorage.setItem(cartItemKey, quantity);
-       window.location.href = "cart.html";
+       window.location.href = "cart.html"; // EXPLICATION
    })
 })();
